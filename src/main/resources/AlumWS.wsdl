@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="AlumWebServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum" elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum" version="1.0">
+
+            <xs:element name="confirmAttendance" type="tns:confirmAttendance"/>
+
+            <xs:element name="confirmAttendanceResponse" type="tns:confirmAttendanceResponse"/>
+
+            <xs:complexType name="confirmAttendance">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="graduate" type="tns:graduate"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="graduate">
+                <xs:complexContent>
+                    <xs:extension base="tns:expected">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="distinctions" nillable="true" type="tns:distinction"/>
+                            <xs:element minOccurs="0" name="field" type="tns:field"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="guests" nillable="true" type="tns:guest"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+            <xs:complexType name="expected">
+                <xs:complexContent>
+                    <xs:extension base="tns:participant">
+                        <xs:sequence>
+                            <xs:element name="isAttending" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="mail" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+            <xs:complexType abstract="true" name="participant">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="firstname" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lastname" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="guest">
+                <xs:complexContent>
+                    <xs:extension base="tns:participant">
+                        <xs:sequence>
+                            <xs:element name="payingGuest" type="xs:boolean"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+            <xs:complexType name="confirmAttendanceResponse">
+                <xs:sequence/>
+            </xs:complexType>
+
+            <xs:simpleType name="distinction">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="MAJOR"/>
+                    <xs:enumeration value="HONOR"/>
+                    <xs:enumeration value="HODOR"/>
+                    <xs:enumeration value="HARRY"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:simpleType name="field">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SI"/>
+                    <xs:enumeration value="MAM"/>
+                    <xs:enumeration value="GB"/>
+                    <xs:enumeration value="ITII"/>
+                    <xs:enumeration value="GE"/>
+                    <xs:enumeration value="ELEC"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="confirmAttendance">
+        <wsdl:part element="tns:confirmAttendance" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="confirmAttendanceResponse">
+        <wsdl:part element="tns:confirmAttendanceResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="AlumWebService">
+        <wsdl:operation name="confirmAttendance">
+            <wsdl:input message="tns:confirmAttendance" name="confirmAttendance">
+            </wsdl:input>
+            <wsdl:output message="tns:confirmAttendanceResponse" name="confirmAttendanceResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="AlumWebServiceImplServiceSoapBinding" type="tns:AlumWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="confirmAttendance">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="confirmAttendance">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="confirmAttendanceResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="AlumWebServiceImplService">
+        <wsdl:port binding="tns:AlumWebServiceImplServiceSoapBinding" name="AlumWebServiceImplPort">
+            <soap:address location="http://localhost:8082/polydiploma-backend/webservices/AlumWS"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
