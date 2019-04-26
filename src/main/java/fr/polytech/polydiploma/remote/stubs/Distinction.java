@@ -6,17 +6,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for distinction.
+ * <p>Classe Java pour distinction.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * <p>
  * <pre>
  * &lt;simpleType name="distinction"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
  *     &lt;enumeration value="MAJOR"/&gt;
  *     &lt;enumeration value="HONOR"/&gt;
- *     &lt;enumeration value="HODOR"/&gt;
- *     &lt;enumeration value="HARRY"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
  * </pre>
@@ -27,9 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 public enum Distinction {
 
     MAJOR,
-    HONOR,
-    HODOR,
-    HARRY;
+    HONOR;
 
     public String value() {
         return name();

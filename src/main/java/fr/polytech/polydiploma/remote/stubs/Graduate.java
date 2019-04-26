@@ -11,14 +11,14 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for graduate complex type.
+ * <p>Classe Java pour graduate complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType name="graduate"&gt;
  *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum}expected"&gt;
+ *     &lt;extension base="{http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum}speaker"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="distinctions" type="{http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum}distinction" maxOccurs="unbounded" minOccurs="0"/&gt;
  *         &lt;element name="field" type="{http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum}field" minOccurs="0"/&gt;
@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
     "guests"
 })
 public class Graduate
-    extends Expected
+    extends Speaker
 {
 
     @XmlElement(nillable = true)
@@ -79,7 +79,7 @@ public class Graduate
     }
 
     /**
-     * Gets the value of the field property.
+     * Obtient la valeur de la propriété field.
      * 
      * @return
      *     possible object is
@@ -91,7 +91,7 @@ public class Graduate
     }
 
     /**
-     * Sets the value of the field property.
+     * Définit la valeur de la propriété field.
      * 
      * @param value
      *     allowed object is

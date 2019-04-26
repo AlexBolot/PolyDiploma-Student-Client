@@ -2,9 +2,17 @@
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum" elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum" version="1.0">
 
+            <xs:element name="addGuest" type="tns:addGuest"/>
+
+            <xs:element name="addGuestResponse" type="tns:addGuestResponse"/>
+
             <xs:element name="confirmAttendance" type="tns:confirmAttendance"/>
 
             <xs:element name="confirmAttendanceResponse" type="tns:confirmAttendanceResponse"/>
+
+            <xs:element name="payBalance" type="tns:payBalance"/>
+
+            <xs:element name="payBalanceResponse" type="tns:payBalanceResponse"/>
 
             <xs:complexType name="confirmAttendance">
                 <xs:sequence>
@@ -14,7 +22,7 @@
 
             <xs:complexType name="graduate">
                 <xs:complexContent>
-                    <xs:extension base="tns:expected">
+                    <xs:extension base="tns:speaker">
                         <xs:sequence>
                             <xs:element maxOccurs="unbounded" minOccurs="0" name="distinctions" nillable="true" type="tns:distinction"/>
                             <xs:element minOccurs="0" name="field" type="tns:field"/>
@@ -24,7 +32,7 @@
                 </xs:complexContent>
             </xs:complexType>
 
-            <xs:complexType name="expected">
+            <xs:complexType name="speaker">
                 <xs:complexContent>
                     <xs:extension base="tns:participant">
                         <xs:sequence>
@@ -38,7 +46,6 @@
             <xs:complexType abstract="true" name="participant">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="firstname" type="xs:string"/>
-                    <xs:element minOccurs="0" name="id" type="xs:long"/>
                     <xs:element minOccurs="0" name="lastname" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
@@ -47,6 +54,7 @@
                 <xs:complexContent>
                     <xs:extension base="tns:participant">
                         <xs:sequence>
+                            <xs:element name="hasPayed" type="xs:boolean"/>
                             <xs:element name="payingGuest" type="xs:boolean"/>
                         </xs:sequence>
                     </xs:extension>
@@ -54,15 +62,42 @@
             </xs:complexType>
 
             <xs:complexType name="confirmAttendanceResponse">
-                <xs:sequence/>
+                <xs:sequence>
+                    <xs:element name="attendance_confirmed" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="addGuest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="inviter" type="tns:graduate"/>
+                    <xs:element minOccurs="0" name="guestFirstName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="guestLastName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="addGuestResponse">
+                <xs:sequence>
+                    <xs:element name="guest_added" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="payBalance">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="graduate" type="tns:graduate"/>
+                    <xs:element minOccurs="0" name="extraData" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="payBalanceResponse">
+                <xs:sequence>
+                    <xs:element name="amount_paid" type="xs:double"/>
+                </xs:sequence>
             </xs:complexType>
 
             <xs:simpleType name="distinction">
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="MAJOR"/>
                     <xs:enumeration value="HONOR"/>
-                    <xs:enumeration value="HODOR"/>
-                    <xs:enumeration value="HARRY"/>
                 </xs:restriction>
             </xs:simpleType>
 
@@ -83,8 +118,24 @@
         <wsdl:part element="tns:confirmAttendance" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="addGuest">
+        <wsdl:part element="tns:addGuest" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addGuestResponse">
+        <wsdl:part element="tns:addGuestResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="confirmAttendanceResponse">
         <wsdl:part element="tns:confirmAttendanceResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="payBalance">
+        <wsdl:part element="tns:payBalance" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="payBalanceResponse">
+        <wsdl:part element="tns:payBalanceResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:portType name="AlumWebService">
@@ -92,6 +143,18 @@
             <wsdl:input message="tns:confirmAttendance" name="confirmAttendance">
             </wsdl:input>
             <wsdl:output message="tns:confirmAttendanceResponse" name="confirmAttendanceResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addGuest">
+            <wsdl:input message="tns:addGuest" name="addGuest">
+            </wsdl:input>
+            <wsdl:output message="tns:addGuestResponse" name="addGuestResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="payBalance">
+            <wsdl:input message="tns:payBalance" name="payBalance">
+            </wsdl:input>
+            <wsdl:output message="tns:payBalanceResponse" name="payBalanceResponse">
             </wsdl:output>
         </wsdl:operation>
     </wsdl:portType>
@@ -103,6 +166,24 @@
                 <soap:body use="literal"/>
             </wsdl:input>
             <wsdl:output name="confirmAttendanceResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addGuest">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="addGuest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addGuestResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="payBalance">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="payBalance">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="payBalanceResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
