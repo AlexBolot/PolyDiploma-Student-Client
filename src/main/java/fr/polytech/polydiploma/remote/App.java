@@ -15,7 +15,9 @@ public class App extends Shell<PolydiplomaAlumPublicAPI> {
         register(
                 Exit.class,
                 Confirm.class,
-                Play.class
+                Play.class,
+                AddGuest.class,
+                PayBalance.class
         );
     }
 

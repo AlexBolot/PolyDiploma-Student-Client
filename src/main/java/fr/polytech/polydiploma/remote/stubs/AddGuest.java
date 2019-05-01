@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="inviter" type="{http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum}graduate" minOccurs="0"/&gt;
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="guestFirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="guestLastName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
@@ -29,38 +29,38 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "addGuest", propOrder = {
-    "inviter",
+    "email",
     "guestFirstName",
     "guestLastName"
 })
 public class AddGuest {
 
-    protected Graduate inviter;
+    protected String email;
     protected String guestFirstName;
     protected String guestLastName;
 
     /**
-     * Obtient la valeur de la propriété inviter.
+     * Obtient la valeur de la propriété email.
      * 
      * @return
      *     possible object is
-     *     {@link Graduate }
+     *     {@link String }
      *     
      */
-    public Graduate getInviter() {
-        return inviter;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * Définit la valeur de la propriété inviter.
+     * Définit la valeur de la propriété email.
      * 
      * @param value
      *     allowed object is
-     *     {@link Graduate }
+     *     {@link String }
      *     
      */
-    public void setInviter(Graduate value) {
-        this.inviter = value;
+    public void setEmail(String value) {
+        this.email = value;
     }
 
     /**

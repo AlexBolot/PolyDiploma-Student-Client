@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="graduate" type="{http://www.polytech.unice.fr/si/4a/isa/polydiploma/alum}graduate" minOccurs="0"/&gt;
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="extraData" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -28,36 +28,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "payBalance", propOrder = {
-    "graduate",
+    "email",
     "extraData"
 })
 public class PayBalance {
 
-    protected Graduate graduate;
+    protected String email;
     protected String extraData;
 
     /**
-     * Obtient la valeur de la propriété graduate.
+     * Obtient la valeur de la propriété email.
      * 
      * @return
      *     possible object is
-     *     {@link Graduate }
+     *     {@link String }
      *     
      */
-    public Graduate getGraduate() {
-        return graduate;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * Définit la valeur de la propriété graduate.
+     * Définit la valeur de la propriété email.
      * 
      * @param value
      *     allowed object is
-     *     {@link Graduate }
+     *     {@link String }
      *     
      */
-    public void setGraduate(Graduate value) {
-        this.graduate = value;
+    public void setEmail(String value) {
+        this.email = value;
     }
 
     /**

@@ -69,7 +69,7 @@
 
             <xs:complexType name="addGuest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="inviter" type="tns:graduate"/>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
                     <xs:element minOccurs="0" name="guestFirstName" type="xs:string"/>
                     <xs:element minOccurs="0" name="guestLastName" type="xs:string"/>
                 </xs:sequence>
@@ -83,7 +83,7 @@
 
             <xs:complexType name="payBalance">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="graduate" type="tns:graduate"/>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
                     <xs:element minOccurs="0" name="extraData" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
