@@ -14,17 +14,22 @@ public class Confirm extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String identifier() {
-        return "confirmer";
+        return "confirmer_venue";
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         Graduate graduate = new Graduate();
         graduate.setFirstname(firstname);
         graduate.setLastname(lastname);
         graduate.setMail(mail);
 
-        shell.system.alum.confirmAttendance(graduate);
+        boolean success = shell.system.alum.confirmAttendance(graduate);
+
+        if (success)
+            log("Confirmation bien enregistrée");
+        else
+            log("Erreur lors de l'enregistrement de la confirmation !");
     }
 
     @Override
@@ -36,6 +41,6 @@ public class Confirm extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String describe() {
-        return "Confirme la participation d'un étudiant diplômé (confirmer PRENOM NOM EMAIL)";
+        return "Confirme la participation d'un étudiant diplômé (confirmer_venue PRENOM NOM EMAIL)";
     }
 }

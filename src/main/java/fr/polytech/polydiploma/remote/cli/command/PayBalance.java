@@ -12,7 +12,7 @@ public class PayBalance extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String identifier() {
-        return "pay";
+        return "payer";
     }
 
     @Override
@@ -28,6 +28,6 @@ public class PayBalance extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String describe() {
-        return "Permet de payer son solde (pay EMAIL_DIPLOMÉ DONNÉES_BANCAIRES)";
+        return "Permet de payer son solde (payer EMAIL_DIPLOMÉ DONNÉES_BANCAIRES)";
     }
 }

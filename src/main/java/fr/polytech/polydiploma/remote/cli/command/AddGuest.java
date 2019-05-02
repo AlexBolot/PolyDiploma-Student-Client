@@ -13,12 +13,17 @@ public class AddGuest extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String identifier() {
-        return "inviter";
+        return "ajouter_invité";
     }
 
     @Override
     public void execute() {
-        shell.system.alum.addGuest(email, guestFirstname, guestLastname);
+        boolean success = shell.system.alum.addGuest(email, guestFirstname, guestLastname);
+
+        if (success)
+            log(guestFirstname + " " + guestLastname + " a bien été ajouté à vos invités");
+        else
+            log("Erreur lors de l'ajout d'un invité !");
     }
 
     @Override
@@ -30,6 +35,6 @@ public class AddGuest extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String describe() {
-        return "Permet d'inscrire un invité supplémentaire (ajouter EMAIL_DIPLOMÉ PRENOM_INVITÉ NOM_INVITÉ)";
+        return "Permet d'inscrire un invité supplémentaire (ajouter_invité EMAIL_DIPLOMÉ PRENOM_INVITÉ NOM_INVITÉ)";
     }
 }

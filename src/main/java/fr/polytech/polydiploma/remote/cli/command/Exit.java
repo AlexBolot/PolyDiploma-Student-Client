@@ -13,7 +13,7 @@ public class Exit extends Command<PolydiplomaAlumPublicAPI> {
 
     @Override
     public String describe() {
-        return "Sortie de Polydiploma";
+        return "Quitter Polydiploma";
     }
 
     @Override
